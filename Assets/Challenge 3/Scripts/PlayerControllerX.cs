@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerControllerX : MonoBehaviour
 {
     public bool gameOver;
+    
 
+    public float isLowEnough = 15.0f; 
     public float floatForce;
     public float gravityModifier;
     private Rigidbody playerRb;
@@ -37,6 +39,12 @@ public class PlayerControllerX : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
         {
             playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
+        }
+
+        if(playerRb.transform.position.y > isLowEnough)
+        {
+            playerRb.transform.position = new Vector3(transform.position.x, isLowEnough, transform.position.z);
+            playerRb.velocity = Vector3.zero;
         }
     }
 
